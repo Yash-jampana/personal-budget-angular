@@ -7,6 +7,20 @@ body {
     font-family: Tahoma, Arial;
 }
 
+button {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+ .button1 {background-color: #4CAF50;}
+
 div.menu {
     width: 100%;
     background-color: #4d5791;
@@ -40,7 +54,7 @@ div.menu ul li a:hover  {
 div.hero {
     height: 350px;
     background-color: #b4c6f0;
-    background-image: url('/bg.png');
+    background-image: url('/pb/bg.png');
     background-size: 400px;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -76,7 +90,7 @@ div.hero h2 {
 .bottom {
     height: 50px;
     background-color: #b4c6f0;
-    padding: 40px;
+    padding: 10px;
 }
 
 .center {
