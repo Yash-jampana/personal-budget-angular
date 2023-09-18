@@ -8,17 +8,17 @@
     <meta name="description" content="Master Your Finances: Discover Budgeting, Saving, and Investing Tips!">
     <!-- This is an SEO Change (added meta keywords)-->
     <meta name="keywords" content="Money management, budgeting tips, saving money, financial planning">
-    <link rel="stylesheet" href="/pb/reset.css">
-    <link rel="stylesheet" href="/pb/main.css">
+    <link rel="stylesheet" href="/../reset.css">
+    <link rel="stylesheet" href="/../main.css">
 </head>
 <body>
 <!--This is an a11y change ( used ARIA roles)-->
     <div class="menu"
         role="navigation">
         <ul>
-            <li><a href="/pb/">Homepage</a></li>
-            <li><a href="/pb/about.html">About</a></li>
-            <li><a href="/pb/login.html">Login</a></li>
+            <li><a href="/../">Homepage</a></li>
+            <li><a href="/../about.html">About</a></li>
+            <li><a href="/../login.html">Login</a></li>
             <li><a href="https://google.com">Google</a></li>
         <!--This is an a11y change (added search bar)-->
             <li><input placeholder="Search" aria-label="Enter your search item"></li>
@@ -124,6 +124,13 @@
 
         </div>
 
+        <article>
+            <h1>Chart</h1>
+            <p>
+                <canvas id="myChart" width="800" height="400"></canvas>
+            </p>
+        </article>
+        
     </div>
 <!-- This is a Semantic HTML Change (Added footer semantic)-->
     <footer class="bottom">
@@ -134,5 +141,57 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>    <script>
+        var dataSource = {
+                datasets: [
+                    {
+                        data: [30, 350, 90, 100, 60, 40, 170, 79],
+                        backgroundColor: [
+                            '#ffcd56',
+                            '#ff6384',
+                            '#00ff00',
+                            '#fd6b19',
+                            '#ffbf00',
+                            '#6495ED',
+                            '#808080',
+                            '#008000'
+                        ],
+                    }
+                ],
+                labels: [
+                    'Eat Out',
+                    'Rent',
+                    'Groceries',
+                    'Shopping',
+                    'Electricity',
+                    'Water Bill',
+                    'Trip',
+                    'Others'
+
+                ]
+            };
+
+            function createChart() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: dataSource
+            });
+        }
+
+        function getBudget() {
+            axios.get('/budget')
+            .then(function (res) {
+                console.log(res.data);
+                for (var i = 0; i < res.data.myBudget.length; i++) {
+                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                    dataSource.labels[i] = res.data.myBudget[i].title;
+                    createChart();
+                }
+            });
+        }
+        getBudget();
+    </script> 
 </body>
 </html>
